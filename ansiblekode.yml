@@ -1,0 +1,30 @@
+---
+- name: kode
+  hosts: client01
+  become: yes
+
+  tasks:
+
+  - name: Update the OS
+    apt:
+      update_cache: yes
+      upgrade: yes
+
+  - name:
+    apt:
+      name:
+      - curl
+      - wget
+      - htop
+
+  - name: users
+    user:
+      name: "{{ item }}"
+      shell: /bin/bash
+      groups: sudo
+      state: present
+      append: yes
+      home: "/home/{{ item }}"
+    loop:
+      - user1
+      - user2
